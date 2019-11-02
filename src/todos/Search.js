@@ -16,7 +16,7 @@ class Search extends React.Component {
                     Search Term
                 </span> 
                 <input value={this.state.searchTerm} onChange={this.searchChange} type="text" />
-                <button onClick={this.props.updateFilter(this.state.searchTerm)}>Search</button>
+                <button onClick={()=>this.props.updateFilter(this.state.searchTerm)}>Search</button>
             </>
         )
     }
