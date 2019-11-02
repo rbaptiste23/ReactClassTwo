@@ -8,21 +8,24 @@ class Todos extends React.Component {
     constructor(props){
         super(props)
         this.state =  {
-           todos: [
-               {name: 'learn react', completed: false},
-               {name: 'walk the dog', completed: false},
-               {name: 'watch the football game', completed: false}
-           ],
-
+           todos: [],
            currentFilter: ''
         }
+
+    }
+
+    componentDidMount(){
+        // This is where you go get data.. 
+        fetch('https://jsonplaceholder.typicode.com/todos')
+        .then(response => response.json())
+        .then(json =>  this.setState({todos:json})) 
     }
 
 
     addTodoItem = (name) => {
         this.setState((state) => {
             return {
-                todos: [...state.todos, {name: name, completed: false}]
+                todos: [...state.todos, {title: name, completed: false}]
             }
         })
     }
@@ -30,7 +33,7 @@ class Todos extends React.Component {
 
     visibleTodos() {
         if (this.state.currentFilter !== ''){
-          return this.state.todos.filter(todo => todo.name.includes(this.state.currentFilter))
+          return this.state.todos.filter(todo => todo.title.includes(this.state.currentFilter))
         } else {
           return this.state.todos 
         }
@@ -45,7 +48,7 @@ class Todos extends React.Component {
         return (
             <>
               <h1>Todos</h1>
-              <AddToDo addTodoItem = {this.addTodoItem}/>
+              <AddToDo addTodoItem = {this.addTodoItem}/><br/>
               <Search updateFilter={this.updateFilter} />
               <TodoList items={this.visibleTodos()} />
             </>

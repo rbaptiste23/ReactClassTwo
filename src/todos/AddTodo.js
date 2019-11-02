@@ -28,8 +28,8 @@ addTodo = () => {
     console.log("add to do")
     // Method is called here however the method is defined in Todos.js 
     // You can pass a method as props 
-    this.props.addTodoItem(this.state.name)
-    this.setState({name: ' ', addingToDo: false})
+    this.props.addTodoItem(this.state.title)
+    this.setState({title: ' ', addingToDo: false})
 }
     render() {
          
@@ -38,7 +38,7 @@ addTodo = () => {
             return (
                 <>
                 <span>Name:</span>
-                <input value={this.state.name} onChange={this.nameChange} type="text" />
+                <input value={this.state.title} onChange={this.nameChange} type="text" />
                 {/* The onClick has a call back function that will call the addTodo method  */}
                 <button onClick={this.addTodo}>Add Todo</button>
                </>
